@@ -66,4 +66,9 @@ class StringTests < Test::Unit::TestCase
     a = 3; b = 4
     assert_equal "a + b = #{a + b}", "a + b = 7", "Should be equal to 7"
   end
+
+  def test_string_comparator
+    assert_equal "A" <=> "Joao", -1, "Expected to return -1 since A < Joao alphabetically"
+    assert_equal "AAAAA" <=> "Joao", -1, "Expected to return -1 since the size of the string doesn't influence the sorting"
+  end
 end
