@@ -23,7 +23,7 @@ class TestHashes < Test::Unit::TestCase
     # New syntax since version 1.9.x
     # Note that there may not be any space between the hash key identifier and the colon
     code = '{ two: 2, three: 3 }'
-    if RUBY_VERSION > "1.9.0"
+    if RUBY_VERSION >= "1.9.0"
       assert RUBY_VERSION > "1.9.0", "Version should be later than 1.9"
       h = eval(code)
       assert_equal({ :two => 2, :three => 3 }, h, "Should be equal to #{code}")
