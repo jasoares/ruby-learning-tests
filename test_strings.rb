@@ -54,6 +54,10 @@ class StringTests < Test::Unit::TestCase
     "The double quotes should be escaped"
   end
 
+  def test_arbitrary_delimiters_for_string_literals
+    assert_equal %q(It's a string), "It's a string", "Expected to return true as it is a valid string declaration"
+  end
+
   def test_string_times_operator
     assert_equal "abc" + "abc", "abc"*2, "Concatenation should not differ from the times operator"
   end
