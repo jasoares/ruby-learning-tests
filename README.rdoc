@@ -8,16 +8,19 @@ Includes version conditional code currently between version 1.8.x and 1.9.x
 == Usage
 
 To run all the tests use:
-
-  <tt>rake<tt>,<tt>rake test<tt> or <tt>rake test:all<tt>
+  rake
+or
+  rake test
+or
+  rake test:all
 
 To run individual tests use:
-  <tt>rake test:<name><tt>
-  replacing <name> by the name of the test
+  rake test:<name>
+replacing <name> by the name of the test
 
 To see which tests you can run use:
 
-  <tt>rake -T<tt>
+  rake -T
   
 == Write Your Own Tests
 If you write your own tests and need to create more files follow the
