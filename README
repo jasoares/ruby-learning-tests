@@ -1,0 +1,33 @@
+= Ruby Learning Tests
+
+Ruby Unit tests written to learn ruby and their most specific details, 
+differences between versions and other curiosities
+
+Includes version conditional code currently between version 1.8.x and 1.9.x
+
+== Usage
+
+To run all the tests use:
+
+  <tt>rake<tt>,<tt>rake test<tt> or <tt>rake test:all<tt>
+
+To run individual tests use:
+  <tt>rake test:<name><tt>
+  replacing <name> by the name of the test
+
+To see which tests you can run use:
+
+  <tt>rake -T<tt>
+  
+== Write Your Own Tests
+If you write your own tests and need to create more files follow the
+pattern already in place 'test_*.rb' replacing * by the name of the test.
+This way the Rakefile will create new tasks automatically for them, or
+you can alter the Rakefile if you want.
+
+This project can be found on GitHub at the following URL.
+
+  http://github.com/jasoares/ruby-learning-tests/
+
+If you want to write your own tests, please fork this
+repository and grow your own...
