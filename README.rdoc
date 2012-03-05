@@ -7,11 +7,14 @@ Includes version conditional code currently between version 1.8.x and 1.9.x
 
 == Usage
 
-To run all the tests use:
+To run all the tests together use:
   rake
 or
   rake test
 or
+  rake test:digest
+
+To run all tests separately use:
   rake test:all
 
 To run individual tests use:
