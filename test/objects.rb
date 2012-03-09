@@ -15,6 +15,20 @@ class TestObjects < Test::Unit::TestCase
 		@p = Person.new("João", "Soares")
 		@q = Person.new("João", "Soares")
 		@tp = Person.new("João", "Soares").taint
+		@f = File.new("objects.log", "w")
+		Marshal.dump @obj1, @f
+		Marshal.dump @obj2, @f
+		Marshal.dump @fixnum1, @f
+		Marshal.dump @float1, @f
+		Marshal.dump @p, @f
+		@f.close
+		@mf = File.open("objects.log", "r+")
+		@mobj1 = Marshal.load @mf
+		@mobj2 = Marshal.load @mf
+		@mfixnum1 = Marshal.load @mf
+		@mfloat1 = Marshal.load @mf
+		@mp = Marshal.load @mf
+		@mf.close
 	end
 
 	def test_object_identity
@@ -73,6 +87,19 @@ class TestObjects < Test::Unit::TestCase
 		assert_equal @fixnum1.to_s, String(@fixnum1), "Should be equal to the result of @fixnum1.to_s"
 	end
 
+	def test_object_boolean_comparation
+		assert_not_equal @fixnum1, nil, "Should be different"
+		assert_not_equal @fixnum1, false, "Should be different"
+		assert_not_equal @p, nil, "Should be different"
+		assert_not_equal @p, false, "Should be different"
+	end
+
+	def test_object_implicit_boolean_conversion
+		assert !nil, "nil should be read as false"
+		assert @fixnum1, "Any object that is neither not nil neither false should be considered true"
+		assert @p, "Should be read as true since @p is neither nil nor false"
+	end
+
 	def test_object_class
 		assert_equal @obj1.class, String, "Should be of the class String"
 		assert_equal @obj1.class, @obj2.class, "Should be of the same class"
@@ -90,6 +117,7 @@ class TestObjects < Test::Unit::TestCase
 		assert @fixnum1.respond_to?(:to_s), "Should respond to to_s since Fixnum implements that method"
 	end
 
+
 	def test_string_tainted_object
 		assert @tobj.tainted?, "Should be tainted"
 		assert @tobj.upcase.tainted?, "Should be tainted"
@@ -98,6 +126,14 @@ class TestObjects < Test::Unit::TestCase
 	def test_custom_tainted_object
 		assert @tp.tainted?, "Should be tainted"
 		assert @tp.to_s.tainted?, "Should be tainted, but requires overriding the taint method"
+	end
+
+	def test_object_marshaling
+		assert_equal @obj1, @mobj1, "Shoulb be equal before and after marshaling"
+		assert_equal @obj2, @mobj2, "Shoulb be equal before and after marshaling"
+		assert_equal @fixnum1, @mfixnum1, "Shoulb be equal before and after marshaling"
+		assert_equal @float1, @mfloat1, "Shoulb be equal before and after marshaling"
+		assert_equal @p, @mp, "Shoulb be equal before and after marshaling"
 	end
 
 end
