@@ -13,6 +13,7 @@ class Person
   def taint
     @fname.taint
     @lname.taint
+    super
   end
 
   def to_ary
