@@ -7,6 +7,7 @@ class TestObjects < Test::Unit::TestCase
 
 	def setup
 		@str1 = "object"
+		@fstr = @str1.clone.freeze
 		@str2 = @str3 = "object"
 		@tstr = "object".taint
 		@dobj = @str1.dup
@@ -27,7 +28,7 @@ class TestObjects < Test::Unit::TestCase
 	def test_object_identity
 		assert_equal @str1.object_id, @str1.__id__, "Should be the same id"
 		assert_equal @str2.object_id, @str3.object_id, "Should be the same object"
-		assert @str2.equal?(@str3), "Should be equal as both variables point to the same object"
+		assert_same @str2, @str3, "Should be equal as both variables point to the same object"
 	end
 
 	def test_string_objects_equality
@@ -51,13 +52,13 @@ class TestObjects < Test::Unit::TestCase
 	def test_tainted_objects_equality
 		assert_equal @str1, @tstr, "Should be equal in content"
 		assert @str1.eql?(@tstr), "Should be equal in content and type"
-		assert !(@str1.equal? @tstr), "Should be different objects"
+		assert_not_same @str1, @tstr, "Should be different objects"
 	end
 
 	def test_custom_tainted_objects_equality
 		assert_equal @p, @tp, "Should be equal in content"
 		assert @p.eql?(@tp), "Should be equal in content and type"
-		assert !(@p.equal? @tp), "Should be different objects"
+		assert_not_same @p, @tp, "Should be different objects"
 	end
 
 	def test_implicit_conversion
@@ -81,9 +82,9 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_object_boolean_comparation
-		assert_not_equal @fixnum1, nil, "Should be different"
+		assert_not_nil @fixnum1, "Should be different"
 		assert_not_equal @fixnum1, false, "Should be different"
-		assert_not_equal @p, nil, "Should be different"
+		assert_not_nil @p, "Should be different"
 		assert_not_equal @p, false, "Should be different"
 	end
 
@@ -101,8 +102,8 @@ class TestObjects < Test::Unit::TestCase
 
 	def test_object_type
 		assert !@fixnum1.instance_of?(Numeric), "Should be false as instance_of? does not check inheritance"
-		assert @fixnum1.is_a?(Numeric), "Should be true as is_a? checks for inheritance"
-		assert @fixnum1.kind_of?(Object), "Should be true, kind_of is an alias for is_a?"
+		assert_kind_of Numeric, @fixnum1, "Should be true as kind_of? checks for inheritance"
+		assert_kind_of Object, @fixnum1, "Should be true, kind_of is an alias for is_a?"
 		assert Numeric === @fixnum1, "Should be true as === is defined in class Class as the is_a? method"
 	end
 
@@ -110,6 +111,12 @@ class TestObjects < Test::Unit::TestCase
 		assert @fixnum1.respond_to?(:to_s), "Should respond to to_s since Fixnum implements that method"
 	end
 
+	def test_frozen_objects
+		assert_nothing_raised(RuntimeError) { @str1.upcase! }
+		assert_raise(RuntimeError) { @fstr.upcase! }
+		assert_nothing_raised(RuntimeError) { @p.fname = "Jane" }
+		assert_raise(RuntimeError) { @fp.fname = "Jane" }
+	end
 
 	def test_string_tainted_object
 		assert @tstr.tainted?, "Should be tainted"
