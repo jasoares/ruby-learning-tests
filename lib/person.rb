@@ -6,6 +6,10 @@ class Person
     @fname, @lname = fname, lname
   end
 
+  def to_ary
+    [@fname, @lname]
+  end
+
   def to_s
     "Name: #{@fname} #{@lname}"
   end
@@ -14,8 +18,15 @@ class Person
     "#{@fname} #{@lname}"
   end
 
-  def to_ary
-    [@fname, @lname]
+  def == o
+    o.respond_to?(:fname) && o.respond_to?(:lname) ?
+      @fname == o.fname &&
+      @lname == o.lname :
+      false
+  end
+
+  def eql? o
+    o.equal?(self) ? true : (self.class == o.class ? self == o : false)
   end
 
   alias :to_a :to_ary
