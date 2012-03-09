@@ -2,12 +2,12 @@ class Person
 
   attr_accessor :fname, :lname
 
-  def initialize fname, lname
+  def initialize fname="John", lname="Doe"
     @fname, @lname = fname, lname
   end
 
   def initialize_copy orig
-    @fname, @lname = orig.fname, "#{orig.lname}'s clone"
+    @fname, @lname = orig.fname, orig.lname
   end
 
   def taint

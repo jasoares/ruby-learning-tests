@@ -13,11 +13,15 @@ class TestObjects < Test::Unit::TestCase
 		@fixnum1 = 1
 		@fixnum2 = 1
 		@float1 = 1.0
-		@p = Person.new("João", "Soares")
-		@q = Person.new("João", "Soares")
-		@tp = Person.new("João", "Soares").taint
+		@p = Person.new
+		@cp = @p.clone
+		@fp = @p.clone.freeze
+		@tp = @p.clone.taint
 		@dp = @p.dup
 		@dtp = @tp.dup
+		@ctp = @tp.clone
+		@dfp = @fp.dup
+		@cfp = @fp.clone
 	end
 
 	def test_object_identity
@@ -40,8 +44,8 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_custom_objects_equality
-		assert_equal @p, @q, "Should be equal in content as defined in Person#=="
-		assert @p.eql?(@q), "Should be equal in content and type as defined in Person#eql?"
+		assert_equal @p, @cp, "Should be equal in content as defined in Person#=="
+		assert @p.eql?(@cp), "Should be equal in content and type as defined in Person#eql?"
 	end
 
 	def test_tainted_objects_equality
@@ -119,11 +123,23 @@ class TestObjects < Test::Unit::TestCase
 
 	def test_object_duplicates
 		assert_equal @str1, @dobj, "Should be equal before and after the duplicate"
-		assert_not_equal @p, @dp, "Should not be equal, see the initialize_copy implementation of the class Person"
+		assert_equal @p, @dp, "Should be equal, see the initialize_copy implementation of the class Person"
 	end
 
-	def test_tainted_object_duplicates
+	def test_duplicated_tainted_object
 		assert @dtp.tainted?, "Should be tainted"
+	end
+
+	def test_cloned_tainted_object
+		assert @ctp.tainted?, "Should be tainted"
+	end
+
+	def test_duplicated_frozen_object
+		assert !@dfp.frozen?, "Should not be frozen"
+	end
+
+	def test_cloned_frozen_object
+		assert @cfp.frozen?, "Should be frozen"
 	end
 
 end
