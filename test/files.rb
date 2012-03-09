@@ -2,7 +2,7 @@ require 'test/unit'
 
 class TestFiles < Test::Unit::TestCase
 
-  FILE_NAME = "test_new_file.txt"
+  FILE_NAME = "./tmp/test_file.txt"
   CONTENT = "sample content"
 
   def test_create

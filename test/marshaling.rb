@@ -4,18 +4,20 @@ require './lib/person.rb'
 
 class TestMarshaling < Test::Unit::TestCase
 
+  FILE_NAME = "./tmp/objects.log"
+
   def setup
     @str = "object"
     @fixnum = 1
     @float = 1.0
     @p = Person.new("João", "Soares")
-    @f = File.new("objects.log", "w")
+    @f = File.new(FILE_NAME, "w")
     Marshal.dump @str, @f
     Marshal.dump @fixnum, @f
     Marshal.dump @float, @f
     Marshal.dump @p, @f
     @f.close
-    @mf = File.open("objects.log", "r+")
+    @mf = File.open(FILE_NAME, "r+")
     @mstr = Marshal.load @mf
     @mfixnum = Marshal.load @mf
     @mfloat = Marshal.load @mf
