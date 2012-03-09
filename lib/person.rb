@@ -6,6 +6,15 @@ class Person
     @fname, @lname = fname, lname
   end
 
+  def initialize_copy orig
+    @fname, @lname = orig.fname, "#{orig.lname}'s clone"
+  end
+
+  def taint
+    @fname.taint
+    @lname.taint
+  end
+
   def to_ary
     [@fname, @lname]
   end
@@ -26,7 +35,8 @@ class Person
   end
 
   def eql? o
-    o.equal?(self) ? true : (self.class == o.class ? self == o : false)
+    # Accepts to compare descendants and is symmetric a.eql?(b) == b.eql?(a)
+    o.equal?(self) ? true : (o.is_a?(self.class) || self.is_a?(o.class) ? self == o : false)
   end
 
   alias :to_a :to_ary
