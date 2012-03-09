@@ -6,10 +6,10 @@ require './lib/customer.rb'
 class TestObjects < Test::Unit::TestCase
 
 	def setup
-		@obj1 = "object"
-		@obj2 = @obj3 = "object"
-		@tobj = "object".taint
-		@dobj = @obj1.dup
+		@str1 = "object"
+		@str2 = @str3 = "object"
+		@tstr = "object".taint
+		@dobj = @str1.dup
 		@fixnum1 = 1
 		@fixnum2 = 1
 		@float1 = 1.0
@@ -21,16 +21,16 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_object_identity
-		assert_equal @obj1.object_id, @obj1.__id__, "Should be the same id"
-		assert_equal @obj2.object_id, @obj3.object_id, "Should be the same object"
-		assert @obj2.equal?(@obj3), "Should be equal as both variables point to the same object"
+		assert_equal @str1.object_id, @str1.__id__, "Should be the same id"
+		assert_equal @str2.object_id, @str3.object_id, "Should be the same object"
+		assert @str2.equal?(@str3), "Should be equal as both variables point to the same object"
 	end
 
 	def test_string_objects_equality
-		assert_equal @obj1, @obj2, "Should be equal as both have the same content"
-		assert @obj1.eql?(@obj2), "Should be as both have the same content and are of the same type"
-		assert !(@obj1.equal?(@obj2)), "Should be different objects"
-		assert @obj2.equal?(@obj3), "Should be the same object"
+		assert_equal @str1, @str2, "Should be equal as both have the same content"
+		assert @str1.eql?(@str2), "Should be as both have the same content and are of the same type"
+		assert !(@str1.equal?(@str2)), "Should be different objects"
+		assert @str2.equal?(@str3), "Should be the same object"
 	end
 
 	def test_numeric_objects_equality
@@ -45,9 +45,9 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_tainted_objects_equality
-		assert_equal @obj1, @tobj, "Should be equal in content"
-		assert @obj1.eql?(@tobj), "Should be equal in content and type"
-		assert !(@obj1.equal? @tobj), "Should be different objects"
+		assert_equal @str1, @tstr, "Should be equal in content"
+		assert @str1.eql?(@tstr), "Should be equal in content and type"
+		assert !(@str1.equal? @tstr), "Should be different objects"
 	end
 
 	def test_custom_tainted_objects_equality
@@ -90,9 +90,9 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_object_class
-		assert_equal @obj1.class, String, "Should be of the class String"
-		assert_equal @obj1.class, @obj2.class, "Should be of the same class"
-		assert @obj1.instance_of?(String), "Should be true as @obj1 is a String"
+		assert_equal @str1.class, String, "Should be of the class String"
+		assert_equal @str1.class, @str2.class, "Should be of the same class"
+		assert @str1.instance_of?(String), "Should be true as @str1 is a String"
 	end
 
 	def test_object_type
@@ -108,8 +108,8 @@ class TestObjects < Test::Unit::TestCase
 
 
 	def test_string_tainted_object
-		assert @tobj.tainted?, "Should be tainted"
-		assert @tobj.upcase.tainted?, "Should be tainted"
+		assert @tstr.tainted?, "Should be tainted"
+		assert @tstr.upcase.tainted?, "Should be tainted"
 	end
 
 	def test_custom_tainted_object
@@ -118,7 +118,7 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_object_duplicates
-		assert_equal @obj1, @dobj, "Should be equal before and after the duplicate"
+		assert_equal @str1, @dobj, "Should be equal before and after the duplicate"
 		assert_not_equal @p, @dp, "Should not be equal, see the initialize_copy implementation of the class Person"
 	end
 
