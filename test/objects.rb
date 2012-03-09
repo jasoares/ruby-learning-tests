@@ -9,26 +9,15 @@ class TestObjects < Test::Unit::TestCase
 		@obj1 = "object"
 		@obj2 = @obj3 = "object"
 		@tobj = "object".taint
+		@dobj = @obj1.dup
 		@fixnum1 = 1
 		@fixnum2 = 1
 		@float1 = 1.0
 		@p = Person.new("João", "Soares")
 		@q = Person.new("João", "Soares")
 		@tp = Person.new("João", "Soares").taint
-		@f = File.new("objects.log", "w")
-		Marshal.dump @obj1, @f
-		Marshal.dump @obj2, @f
-		Marshal.dump @fixnum1, @f
-		Marshal.dump @float1, @f
-		Marshal.dump @p, @f
-		@f.close
-		@mf = File.open("objects.log", "r+")
-		@mobj1 = Marshal.load @mf
-		@mobj2 = Marshal.load @mf
-		@mfixnum1 = Marshal.load @mf
-		@mfloat1 = Marshal.load @mf
-		@mp = Marshal.load @mf
-		@mf.close
+		@dp = @p.dup
+		@dtp = @tp.dup
 	end
 
 	def test_object_identity
@@ -128,12 +117,13 @@ class TestObjects < Test::Unit::TestCase
 		assert @tp.to_s.tainted?, "Should be tainted, but requires overriding the taint method"
 	end
 
-	def test_object_marshaling
-		assert_equal @obj1, @mobj1, "Shoulb be equal before and after marshaling"
-		assert_equal @obj2, @mobj2, "Shoulb be equal before and after marshaling"
-		assert_equal @fixnum1, @mfixnum1, "Shoulb be equal before and after marshaling"
-		assert_equal @float1, @mfloat1, "Shoulb be equal before and after marshaling"
-		assert_equal @p, @mp, "Shoulb be equal before and after marshaling"
+	def test_object_duplicates
+		assert_equal @obj1, @dobj, "Should be equal before and after the duplicate"
+		assert_not_equal @p, @dp, "Should not be equal, see the initialize_copy implementation of the class Person"
+	end
+
+	def test_tainted_object_duplicates
+		assert @dtp.tainted?, "Should be tainted"
 	end
 
 end
