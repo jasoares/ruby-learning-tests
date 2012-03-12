@@ -25,6 +25,11 @@ class TestArrays < Test::Unit::TestCase
     assert_equal [1, 2, 333], array, "Should be [1, 2, 333]"
   end
 
+  def test_array_of_strings
+    s_ary = %w{ Portugal Madeira Azores }
+    assert_equal ['Portugal', 'Madeira', 'Azores'], s_ary
+  end
+
   def test_array_square_bracket_method
     a = ['a', 'b', 'c', 'd', 'e', 'f']
     assert_equal 'a', a[0], "Should have been 'a'"

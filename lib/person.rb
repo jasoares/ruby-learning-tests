@@ -2,7 +2,7 @@ class Person
 
   attr_accessor :fname, :lname
 
-  def initialize fname="John", lname="Doe"
+  def initialize fname="Yukihiro", lname="Matsumoto"
     @fname, @lname = fname, lname
   end
 
