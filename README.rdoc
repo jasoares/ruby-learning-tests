@@ -1,4 +1,4 @@
-= Ruby Learning Tests
+= Ruby Learning Tests (v0.4.0)
 
 Ruby Unit tests written to learn ruby and their most specific details, 
 differences between versions and other curiosities
@@ -24,6 +24,11 @@ replacing <name> by the name of the test
 To see which tests you can run use:
 
   rake -T
+
+Every file in the test folder corresponds to a test suite you can run, all the Rakefile does is gather all the files in this folder and generate a test task for each of them.
+
+The lib folder contains base example classes used in the tests, these will grow
+as the tests will become more complex and complete.
   
 == Write Your Own Tests
 If you write your own tests and need to create more files follow the
@@ -37,3 +42,7 @@ This project can be found on GitHub at the following URL.
 
 If you want to write your own tests, please fork this
 repository and grow your own...
+
+== Development
+
+Active development happens in the trunk branch, master branch is used to merge stable versions of the trunk branch.
