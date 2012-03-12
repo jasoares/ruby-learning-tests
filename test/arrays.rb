@@ -26,8 +26,8 @@ class TestArrays < Test::Unit::TestCase
   end
 
   def test_array_of_strings
-    sarray = %w{ Portugal Madeira Azores }
-    assert_equal ['Portugal', 'Madeira', 'Azores'], sarray
+    s_ary = %w{ Portugal Madeira Azores }
+    assert_equal ['Portugal', 'Madeira', 'Azores'], s_ary
   end
 
   def test_array_square_bracket_method
