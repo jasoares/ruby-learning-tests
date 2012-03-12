@@ -1,4 +1,4 @@
-= Ruby Learning Tests (v0.4.0)
+= Ruby Learning Tests (v0.4.6)
 
 Ruby Unit tests written to learn ruby and their most specific details, 
 differences between versions and other curiosities
