@@ -62,7 +62,7 @@ class TestAssignment < Test::Unit::TestCase
   end
 
   def test_parallel_assignment_multiple_lvalues_single_array_rvalue_custom_object
-    @p = Person.new("John", "Doe")
+    @p = Person.new
     @fname, @lname = @p
     assert @fname == @p.fname && @lname == @p.lname, "The object's to_ary method is called to expand the object into two variables"
   end
