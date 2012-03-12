@@ -3,6 +3,11 @@ require './lib/person.rb'
 
 class TestAssignment < Test::Unit::TestCase
 
+  def test_chained_assignment
+    a = b = 2 + 3
+    assert a == b && b == 5, "a should be equal to b and both should be equal to 5"
+  end
+
   # Ambiguous assignment
 
   def x
