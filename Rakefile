@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-require 'bundler/gem_tasks'
 require 'rake/testtask'
 
 TEST_FILES = FileList['test/*.rb']
