@@ -2,10 +2,6 @@ require 'test/unit'
 
 class TestConditionals < Test::Unit::TestCase
 
-  def setup
-
-  end
-
   def test_complex_if_elsif_else_expression
     (1..4).each do |x|
       y = 2
