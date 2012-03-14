@@ -118,6 +118,4 @@ class TestLoops < Test::Unit::TestCase
     assert_equal [[:one, 1], [:two, 2], [:three, 3]], array, "hash should have been copied to the array"
   end
 
-
-
 end
