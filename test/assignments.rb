@@ -1,7 +1,8 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 require './lib/person.rb'
 
-class TestAssignment < Test::Unit::TestCase
+class TestAssignment < MiniTest::Unit::TestCase
 
   def test_chained_assignment
     a = b = 2 + 3

@@ -1,6 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 
-class StringTests < Test::Unit::TestCase
+class StringTests < MiniTest::Unit::TestCase
 
   def test_single_quoted_string_escaped_apostrophe
     assert_equal 'It\'s working', "It's working", "The apostrophe should have been escaped"
@@ -14,7 +15,7 @@ class StringTests < Test::Unit::TestCase
     last_id = 0
     2.times do
       curr_id = "abc".object_id
-      assert_not_equal last_id, curr_id, "Strings are mutable in ruby so each loop should create a new string literal."
+      refute_equal last_id, curr_id, "Strings are mutable in ruby so each loop should create a new string literal."
       last_id = curr_id
     end
   end

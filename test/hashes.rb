@@ -1,6 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 
-class TestHashes < Test::Unit::TestCase
+class TestHashes < MiniTest::Unit::TestCase
 
   def setup
     # Note that single or double quotes, makes no difference

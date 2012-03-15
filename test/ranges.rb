@@ -1,6 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 
-class TestRanges < Test::Unit::TestCase
+class TestRanges < MiniTest::Unit::TestCase
 
   def setup
     @r = 1..5

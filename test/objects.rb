@@ -1,9 +1,10 @@
 # *-* encoding: utf-8 *-*
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 require './lib/person.rb'
 require './lib/customer.rb'
 
-class TestObjects < Test::Unit::TestCase
+class TestObjects < MiniTest::Unit::TestCase
 
 	def setup
 		@str1 = "object"
@@ -52,13 +53,13 @@ class TestObjects < Test::Unit::TestCase
 	def test_tainted_objects_equality
 		assert_equal @str1, @tstr, "Should be equal in content"
 		assert @str1.eql?(@tstr), "Should be equal in content and type"
-		assert_not_same @str1, @tstr, "Should be different objects"
+		refute_same @str1, @tstr, "Should be different objects"
 	end
 
 	def test_custom_tainted_objects_equality
 		assert_equal @p, @tp, "Should be equal in content"
 		assert @p.eql?(@tp), "Should be equal in content and type"
-		assert_not_same @p, @tp, "Should be different objects"
+		refute_same @p, @tp, "Should be different objects"
 	end
 
 	def test_implicit_conversion
@@ -82,10 +83,10 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_object_boolean_comparation
-		assert_not_nil @fixnum1, "Should be different"
-		assert_not_equal @fixnum1, false, "Should be different"
-		assert_not_nil @p, "Should be different"
-		assert_not_equal @p, false, "Should be different"
+		refute_nil @fixnum1, "Should be different"
+		refute_equal @fixnum1, false, "Should be different"
+		refute_nil @p, "Should be different"
+		refute_equal @p, false, "Should be different"
 	end
 
 	def test_object_implicit_boolean_conversion
@@ -112,10 +113,10 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_frozen_objects
-		assert_nothing_raised(RuntimeError) { @str1.upcase! }
-		assert_raise(RuntimeError) { @fstr.upcase! }
-		assert_nothing_raised(RuntimeError) { @p.fname = "Jane" }
-		assert_raise(RuntimeError) { @fp.fname = "Jane" }
+		assert_equal @str1.upcase, @str1.upcase!, "Should alter the string in place since it is not frozen"
+		assert_raises(RuntimeError) { @fstr.upcase! }
+		assert_equal @p.fname = "Jane", @p.fname, 'Should assign @p.fname with "Jane" since it is not frozen'
+		assert_raises(RuntimeError) { @fp.fname = "Jane" }
 	end
 
 	def test_string_tainted_object

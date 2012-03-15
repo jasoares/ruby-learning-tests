@@ -1,6 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 
-class TestConditionals < Test::Unit::TestCase
+class TestConditionals < MiniTest::Unit::TestCase
 
   def test_complex_if_elsif_else_expression
     (1..4).each do |x|

@@ -1,7 +1,8 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 require 'benchmark'
 
-class TestSymbols < Test::Unit::TestCase
+class TestSymbols < MiniTest::Unit::TestCase
 
   def test_symbol_creation_syntax_variants
     assert_equal :symbol, :"symbol", "Should return true since they represent the same symbol"

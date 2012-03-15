@@ -1,6 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 
-class TestOperators < Test::Unit::TestCase
+class TestOperators < MiniTest::Unit::TestCase
 
   # Unary Plus Operator
 

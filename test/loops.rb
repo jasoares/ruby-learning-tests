@@ -1,6 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 
-class TestLoops < Test::Unit::TestCase
+class TestLoops < MiniTest::Unit::TestCase
 
   # while and until loops
 

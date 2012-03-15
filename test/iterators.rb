@@ -1,6 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 
-class TestIterators < Test::Unit::TestCase
+class TestIterators < MiniTest::Unit::TestCase
 
   def test_times_iterator
     x = 0; y = 0

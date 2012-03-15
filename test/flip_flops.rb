@@ -1,6 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 
-class TestFlipFlops < Test::Unit::TestCase
+class TestFlipFlops < MiniTest::Unit::TestCase
 
   def test_flip_flop_operator1
     count = 0

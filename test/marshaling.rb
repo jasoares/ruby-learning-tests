@@ -1,8 +1,9 @@
 # *-* encoding: utf-8 *-*
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 require './lib/person.rb'
 
-class TestMarshaling < Test::Unit::TestCase
+class TestMarshaling < MiniTest::Unit::TestCase
 
   FILE_NAME = "./tmp/objects.log"
 

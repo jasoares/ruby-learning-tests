@@ -1,6 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/pride'
 
-class TestArrays < Test::Unit::TestCase
+class TestArrays < MiniTest::Unit::TestCase
 
   def test_creating_arrays
     empty_array = Array.new
@@ -74,9 +75,9 @@ class TestArrays < Test::Unit::TestCase
   def test_array_equality
     a = [1, 2, 3]
     b = [2, 3, 1]
-    assert_not_equal a, b, "Should have been different"
-    assert_not_equal a, [[1, 2, 3]], "Should have been different"
-    assert_not_equal a, [[1], [2], [3]], "Should have been different"
+    refute_equal a, b, "Should have been different"
+    refute_equal a, [[1, 2, 3]], "Should have been different"
+    refute_equal a, [[1], [2], [3]], "Should have been different"
   end
 
   def test_array_arithmetic_operators
