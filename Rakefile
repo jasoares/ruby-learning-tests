@@ -1,7 +1,6 @@
-# -*- encoding: utf-8 -*-
 require 'rake/testtask'
 
-TEST_FILES = FileList['test/*.rb']
+TEST_FILES = FileList['test/test_*.rb'].reject {|f| f =~ /\Atest\/test_helpers.rb/ }
 
 task :default => :test
 desc "Run all tests"

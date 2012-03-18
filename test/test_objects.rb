@@ -1,8 +1,6 @@
-# *-* encoding: utf-8 *-*
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/person.rb'
-require './lib/customer.rb'
+require File.expand_path('../test_helpers', __FILE__)
+require 'person'
+require 'customer'
 
 class TestObjects < MiniTest::Unit::TestCase
 

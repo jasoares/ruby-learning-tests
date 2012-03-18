@@ -1,6 +1,5 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/person.rb'
+require File.expand_path('../test_helpers', __FILE__)
+require 'person'
 
 class TestAssignment < MiniTest::Unit::TestCase
 

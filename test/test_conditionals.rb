@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require File.expand_path('../test_helpers', __FILE__)
 
 class TestConditionals < MiniTest::Unit::TestCase
 

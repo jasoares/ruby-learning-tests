@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require File.expand_path('../test_helpers', __FILE__)
 
 class StringTests < MiniTest::Unit::TestCase
 
@@ -40,7 +39,7 @@ class StringTests < MiniTest::Unit::TestCase
     'concatenated into one by the interpreter. '\
     'The resulting string contains no newlines.',
     "These three literals are concatenated into one by the interpreter. The resulting string contains no newlines.",
-    "Should be concatenated and should not contain newlines" 
+    "Should be concatenated and should not contain newlines"
   end
 
   def test_single_quotes_does_not_support_newlines_or_tabs_by_backslash_notation
