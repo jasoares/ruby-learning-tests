@@ -118,4 +118,12 @@ class TestLoops < MiniTest::Unit::TestCase
     assert_equal [[:one, 1], [:two, 2], [:three, 3]], array, "hash should have been copied to the array"
   end
 
+  # loop key word
+
+  def test_loop_iterator
+    x = 0
+    loop { x += 1; break if x > 3 }
+    assert_equal 4, x, "should break the loop when x = 4"
+  end
+
 end

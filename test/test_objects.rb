@@ -11,8 +11,6 @@ class TestObjects < MiniTest::Unit::TestCase
 		@tstr = "object".taint
 		@dobj = @str1.dup
 		@fixnum1 = 1
-		@fixnum2 = 1
-		@float1 = 1.0
 		@p = Person.new
 		@cp = @p.clone
 		@fp = @p.clone.freeze
@@ -28,19 +26,6 @@ class TestObjects < MiniTest::Unit::TestCase
 		assert_equal @str1.object_id, @str1.__id__, "Should be the same id"
 		assert_equal @str2.object_id, @str3.object_id, "Should be the same object"
 		assert_same @str2, @str3, "Should be equal as both variables point to the same object"
-	end
-
-	def test_string_objects_equality
-		assert_equal @str1, @str2, "Should be equal as both have the same content"
-		assert @str1.eql?(@str2), "Should be as both have the same content and are of the same type"
-		assert !(@str1.equal?(@str2)), "Should be different objects"
-		assert @str2.equal?(@str3), "Should be the same object"
-	end
-
-	def test_numeric_objects_equality
-		assert_equal @fixnum1, @float1, "Should be equal as both have the same content and type is not checked"
-		assert !(@fixnum1.eql? @float1), "Should not be eql? since they have different types"
-		assert @fixnum1.eql?(@fixnum2), "Should be equal in content and type"
 	end
 
 	def test_custom_objects_equality

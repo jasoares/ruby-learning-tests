@@ -25,7 +25,7 @@ class TestArrays < MiniTest::Unit::TestCase
     assert_equal [1, 2, 333], array, "Should be [1, 2, 333]"
   end
 
-  def test_array_of_strings
+  def test_array_of_words
     s_ary = %w{ Portugal Madeira Azores }
     assert_equal ['Portugal', 'Madeira', 'Azores'], s_ary
   end
@@ -68,7 +68,7 @@ class TestArrays < MiniTest::Unit::TestCase
   def test_array_square_bracket_insertions
     a = ['B', 'C', 'D', 5, nil]
     a[0, 0] = [1, 2, 3]
-    assert_equal [1, 2, 3, 'B', 'C', 'D', 5, nil], a, "Should be [1, 2, 3, 'B', 'D', 'D', 5, nil]"
+    assert_equal [1, 2, 3, 'B', 'C', 'D', 5, nil], a, "Should be [1, 2, 3, 'B', 'C', 'D', 5, nil]"
   end
 
   def test_array_equality
@@ -104,5 +104,23 @@ class TestArrays < MiniTest::Unit::TestCase
       assert alphabet[i] == letter, "Should be #{alphabet[i]} for i = #{i}"
       i += 1
     end
+  end
+
+  def test_each_iterator
+    ary = [1, 2, 3]; res = []
+    ary.each { |e| res << e += 1 }
+    assert_equal [2, 3, 4], res, "should assign res with ary's elements incremented by 1"
+  end
+
+  def test_each_index_iterator
+    ary = [1, 2, 3]; res = []
+    ary.each_index { |i| res << ary[i] * i }
+    assert_equal [0, 2, 6], res, "should assign res with ary's elements multiplied by their indexes"
+  end
+
+  def test_map_iterator
+    ary = [1, 2, 3];
+    res = ary.map { |e| e*e }
+    assert_equal [1, 4, 9], res, "should return an array with the square of ary's elements"
   end
 end

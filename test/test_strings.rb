@@ -58,6 +58,15 @@ class StringTests < MiniTest::Unit::TestCase
     assert_equal %q(It's a string), "It's a string", "Expected to return true as it is a valid string declaration"
   end
 
+  def test_string_objects_equality
+    str1 = "string"
+    str2 = str3 = "string"
+    assert_equal str1, str2, "Should be equal as both have the same content"
+    assert str1.eql?(str2), "Should be as both have the same content and are of the same type"
+    assert !(str1.equal?(str2)), "Should be different objects"
+    assert str2.equal?(str3), "Should be the same object"
+  end
+
   def test_string_times_operator
     assert_equal "abc" + "abc", "abc"*2, "Concatenation should not differ from the times operator"
   end
