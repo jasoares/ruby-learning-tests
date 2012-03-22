@@ -97,6 +97,8 @@ class TestArrays < MiniTest::Unit::TestCase
     assert_equal [4, 3, 2], b & a, "Should have been [4, 3, 2]"
   end
 
+  # Array iterators, for more check the test_enumerables
+
   def test_array_each
     alphabet = ('A'..'C').to_a
     i = 0
