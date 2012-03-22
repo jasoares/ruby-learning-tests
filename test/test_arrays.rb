@@ -97,6 +97,14 @@ class TestArrays < MiniTest::Unit::TestCase
     assert_equal [4, 3, 2], b & a, "Should have been [4, 3, 2]"
   end
 
+  def test_array_flatten_method
+    assert_equal [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, [2, 3], 4, [5, 6, [7, [8]], 9]].flatten, "should equal the flatten array"
+  end
+
+  def test_array_shift_method
+    assert_equal [1, 2, 3], [1, 2, 3, 4, 5].shift(3), "should equal an array with the first 3 elements of the original array"
+  end
+
   # Array iterators, for more check the test_enumerables
 
   def test_array_each
