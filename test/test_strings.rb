@@ -1,12 +1,20 @@
 require File.expand_path('../test_helpers', __FILE__)
 
 class StringTests < MiniTest::Unit::TestCase
+  
+  def setup
+    @str1 = "abcd"
+    @multiline_string = "This
+is a
+multiline
+string"
+  end
 
   def test_single_quoted_string_escaped_apostrophe
     assert_equal 'It\'s working', "It's working", "The apostrophe should have been escaped"
   end
 
-  def test_single_quoted_backslash_doesnt_need_escaped_when_followed_by_anything_other_than_a_quote_or_a_backslash
+  def test_single_quoted_backslash_doesnt_need_to_be_escaped_when_followed_by_anything_other_than_a_quote_or_a_backslash
     assert_equal 'a\b', 'a\\b', "The two literals should be equal"
   end
 
@@ -55,7 +63,7 @@ class StringTests < MiniTest::Unit::TestCase
   end
 
   def test_arbitrary_delimiters_for_string_literals
-    assert_equal %q(It's a string), "It's a string", "Expected to return true as it is a valid string declaration"
+    assert_equal @str1, %q(abcd), "Expected to return true as it is a valid string declaration"
   end
 
   def test_string_objects_equality
@@ -68,7 +76,7 @@ class StringTests < MiniTest::Unit::TestCase
   end
 
   def test_string_times_operator
-    assert_equal "abc" + "abc", "abc"*2, "Concatenation should not differ from the times operator"
+    assert_equal "abcd" + "abcd", "abcd"*2, "Concatenation should not differ from the times operator"
   end
 
   def test_string_interpolation
@@ -81,7 +89,29 @@ class StringTests < MiniTest::Unit::TestCase
   end
 
   def test_string_comparator
-    assert_equal "A" <=> "Joao", -1, "Expected to return -1 since A < Joao alphabetically"
-    assert_equal "AAAAA" <=> "Joao", -1, "Expected to return -1 since the size of the string doesn't influence the sorting"
+    assert_equal "A" <=> "John", -1, "Expected to return -1 since A < John alphabetically"
+    assert_equal "AAAAA" <=> "John", -1, "Expected to return -1 since the size of the string doesn't influence the sorting"
   end
+
+  # iterate inside a string
+
+  def test_string_each_char_interator
+    ary = []
+    @str1.each_char { |c| ary << c }
+    assert_equal ['a', 'b', 'c', 'd'], ary, "should be equal to the array of all characters"
+  end
+
+  def test_string_each_byte_iterator
+    ary = []
+    @str1.each_byte { |b| ary << b }
+    assert_equal [97, 98, 99, 100], ary, "should be equal to the byte representation of the string"
+  end
+
+  def test_string_each_line_iterator
+    ary = []
+    line_ary = ["This\n", "is a\n", "multiline\n", "string"]
+    @multiline_string.each_line { |line| ary << line }
+    assert_equal line_ary, ary, "should be equal to the array of all the lines of the string"
+  end
+
 end
