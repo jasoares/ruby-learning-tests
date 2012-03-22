@@ -78,4 +78,12 @@ class TestRanges < MiniTest::Unit::TestCase
     assert @msr === 'ABC', "Expected to return true as the range includes the value 'ABC'"
   end
 
+  # range iterators
+
+  def test_range_each_iterator
+    str = ""
+    @r.each { |i| str << i.to_s + ", " }
+    assert_equal "1, 2, 3, 4, 5, ", str, "should be equal to \"1, 2, 3, 4, 5, \""
+  end
+
 end
