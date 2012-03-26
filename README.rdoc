@@ -1,6 +1,6 @@
 = Ruby Learning Tests (v0.4.6-dev)
 
-Ruby Unit tests written to learn ruby and their most specific details, 
+Ruby MiniTests written to learn ruby and their most specific details, 
 differences between versions and other curiosities
 
 Includes version conditional code currently between version 1.8.x and 1.9.x
@@ -19,7 +19,9 @@ To run all tests separately use:
 
 To run individual tests use:
   rake test:<name>
-replacing <name> by the name of the test
+replacing <name> by the name of the test file without the "test_" part and without the ".rb" extension
+Example:
+  rake test:arrays
 
 To see which tests you can run use:
 
@@ -71,5 +73,4 @@ or
 
   bundle install
 
-and your equally ready to go.
-
+and you're equally ready to go.
