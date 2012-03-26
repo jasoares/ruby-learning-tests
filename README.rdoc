@@ -73,4 +73,4 @@ or
 
   bundle install
 
-and your equally ready to go.
+and you're equally ready to go.
