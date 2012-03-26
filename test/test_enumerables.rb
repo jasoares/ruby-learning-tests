@@ -40,7 +40,7 @@ class TestEnumerables < MiniTest::Unit::TestCase
   end
 
   def test_collect_or_map_method
-    assert_equal @ary2, @ary1.collect { |e| e + 1 }, "should be return an array with each element incremented by 1"
+    assert_equal @ary2, @ary1.collect { |e| e + 1 }, "should return an array with each element incremented by 1"
   end
 
   def test_collect_concat_or_flat_map_method
@@ -139,7 +139,5 @@ class TestEnumerables < MiniTest::Unit::TestCase
   def test_inject_or_reduce_method_as_comparator
     assert_equal 10, @ary2.inject(0) { |max, e| max = (max < e) ? e : max }
   end
-
-
 
 end
