@@ -45,12 +45,12 @@ repository and grow your own...
 
 == Development
 
-Active development happens in the trunk branch, master branch is used to merge stable versions of the trunk branch.
+Active development happens in the minitest branch, master branch is used to merge stable versions of the minitest branch. The unit-test is the old branch where all the original code was written previously to the change to to minitest.
 
 == Shifting to MiniTest
 
-The development branch minitest has shifted to use minitest instead of unit test.
-If you are using ruby 1.9.x there's nothing you need to do about it but if you are
+The development branch minitest has shifted to use minitest instead of unit test, the old unit tests will not be further developed.
+If you are using ruby 1.9.x there's nothing you need to do about it but if you are running
 ruby 1.8.x or a prior version you need to make sure you install the minitest gem.
 
 The Gemfile included in the repo asks for version 2.11.3. It's easy to install, just run:
