@@ -1,4 +1,4 @@
-= Ruby Learning Tests (v0.4.6-dev)
+= Ruby Learning Tests (v0.5.0-dev)
 
 Ruby MiniTests written to learn ruby and their most specific details, 
 differences between versions and other curiosities
