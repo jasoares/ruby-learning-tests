@@ -140,6 +140,4 @@ class TestEnumerables < MiniTest::Unit::TestCase
     assert_equal 10, @ary2.inject(0) { |max, e| max = (max < e) ? e : max }
   end
 
-
-
 end

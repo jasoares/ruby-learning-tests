@@ -129,8 +129,7 @@ class TestArrays < MiniTest::Unit::TestCase
   end
 
   def test_map_iterator
-    ary = [1, 2, 3];
-    res = ary.map { |e| e*e }
+    res = [1, 2, 3].map { |e| e*e }
     assert_equal [1, 4, 9], res, "should return an array with the square of ary's elements"
   end
 end
