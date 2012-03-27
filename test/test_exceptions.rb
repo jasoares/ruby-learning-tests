@@ -69,8 +69,8 @@ class TestExceptions < MiniTest::Unit::TestCase
   def test_handling_exceptions3
     begin
       raise StopIteration.new("no more elements")
-    rescue StandardError => se
-      assert_equal StopIteration, $!.class, "should rescue subclasses of #{se.class}"
+    rescue StandardError
+      assert_equal StopIteration, $!.class, "should rescue subclasses of #{$!.class}"
     end
   end
 
@@ -80,9 +80,8 @@ class TestExceptions < MiniTest::Unit::TestCase
       flow << 1
       raise ArgumentError.new("bad argument") if false
       flow << 2
-    rescue ArgumentError => ae
+    rescue ArgumentError
       flow << 3
-      puts "#{ae.message}"
     else
       flow << 4
     end
@@ -95,13 +94,44 @@ class TestExceptions < MiniTest::Unit::TestCase
       flow << 1
       raise ArgumentError.new("bad argument") if false
       flow << 2
-    rescue NoMethodError => nme
+    rescue NoMethodError
       flow << 3
-      puts "#{nme.message}"
     else
       flow << 4
     end
     assert_equal [1, 2, 4], flow, "the else clause should run when no exception is rescued"
+  end
+
+  def test_rescue_with_ensure_clause_when_exception_occurs
+    flow = []
+    begin
+      flow << 1
+      raise ArgumentError.new("bad argument") if true
+      flow << 2
+    rescue ArgumentError
+      flow << 3
+    else
+      flow << 4
+    ensure
+      flow << 5
+    end
+    assert_equal [1, 3, 5], flow, "the ensure clause should run when an exception occurs"
+  end
+
+  def test_rescue_with_ensure_clause_when_exception_does_not_occur
+    flow = []
+    begin
+      flow << 1
+      raise ArgumentError.new("bad argument") if false
+      flow << 2
+    rescue ArgumentError
+      flow << 3
+    else
+      flow << 4
+    ensure
+      flow << 5
+    end
+    assert_equal [1, 2, 4, 5], flow, "the ensure clause should also run when an exception does not occur"
   end
 
 end
