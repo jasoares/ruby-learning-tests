@@ -1,6 +1,6 @@
-require 'test/unit'
+require File.expand_path('../test_helpers', __FILE__)
 
-class TestOperators < Test::Unit::TestCase
+class TestOperators < MiniTest::Unit::TestCase
 
   # Unary Plus Operator
 

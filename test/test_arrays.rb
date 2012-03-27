@@ -1,6 +1,6 @@
-require 'test/unit'
+require File.expand_path('../test_helpers', __FILE__)
 
-class TestArrays < Test::Unit::TestCase
+class TestArrays < MiniTest::Unit::TestCase
 
   def test_creating_arrays
     empty_array = Array.new
@@ -25,7 +25,7 @@ class TestArrays < Test::Unit::TestCase
     assert_equal [1, 2, 333], array, "Should be [1, 2, 333]"
   end
 
-  def test_array_of_strings
+  def test_array_of_words
     s_ary = %w{ Portugal Madeira Azores }
     assert_equal ['Portugal', 'Madeira', 'Azores'], s_ary
   end
@@ -68,15 +68,15 @@ class TestArrays < Test::Unit::TestCase
   def test_array_square_bracket_insertions
     a = ['B', 'C', 'D', 5, nil]
     a[0, 0] = [1, 2, 3]
-    assert_equal [1, 2, 3, 'B', 'C', 'D', 5, nil], a, "Should be [1, 2, 3, 'B', 'D', 'D', 5, nil]"
+    assert_equal [1, 2, 3, 'B', 'C', 'D', 5, nil], a, "Should be [1, 2, 3, 'B', 'C', 'D', 5, nil]"
   end
 
   def test_array_equality
     a = [1, 2, 3]
     b = [2, 3, 1]
-    assert_not_equal a, b, "Should have been different"
-    assert_not_equal a, [[1, 2, 3]], "Should have been different"
-    assert_not_equal a, [[1], [2], [3]], "Should have been different"
+    refute_equal a, b, "Should have been different"
+    refute_equal a, [[1, 2, 3]], "Should have been different"
+    refute_equal a, [[1], [2], [3]], "Should have been different"
   end
 
   def test_array_arithmetic_operators
@@ -97,6 +97,16 @@ class TestArrays < Test::Unit::TestCase
     assert_equal [4, 3, 2], b & a, "Should have been [4, 3, 2]"
   end
 
+  def test_array_flatten_method
+    assert_equal [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, [2, 3], 4, [5, 6, [7, [8]], 9]].flatten, "should equal the flatten array"
+  end
+
+  def test_array_shift_method
+    assert_equal [1, 2, 3], [1, 2, 3, 4, 5].shift(3), "should equal an array with the first 3 elements of the original array"
+  end
+
+  # Array iterators, for more check the test_enumerables
+
   def test_array_each
     alphabet = ('A'..'C').to_a
     i = 0
@@ -104,5 +114,23 @@ class TestArrays < Test::Unit::TestCase
       assert alphabet[i] == letter, "Should be #{alphabet[i]} for i = #{i}"
       i += 1
     end
+  end
+
+  def test_each_iterator
+    ary = [1, 2, 3]; res = []
+    ary.each { |e| res << e += 1 }
+    assert_equal [2, 3, 4], res, "should assign res with ary's elements incremented by 1"
+  end
+
+  def test_each_index_iterator
+    ary = [1, 2, 3]; res = []
+    ary.each_index { |i| res << ary[i] * i }
+    assert_equal [0, 2, 6], res, "should assign res with ary's elements multiplied by their indexes"
+  end
+
+  def test_map_iterator
+    ary = [1, 2, 3];
+    res = ary.map { |e| e*e }
+    assert_equal [1, 4, 9], res, "should return an array with the square of ary's elements"
   end
 end

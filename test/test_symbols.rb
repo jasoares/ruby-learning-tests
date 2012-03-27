@@ -1,7 +1,7 @@
-require 'test/unit'
+require File.expand_path('../test_helpers', __FILE__)
 require 'benchmark'
 
-class TestSymbols < Test::Unit::TestCase
+class TestSymbols < MiniTest::Unit::TestCase
 
   def test_symbol_creation_syntax_variants
     assert_equal :symbol, :"symbol", "Should return true since they represent the same symbol"

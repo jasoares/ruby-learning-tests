@@ -1,6 +1,6 @@
-require 'test/unit'
+require File.expand_path('../test_helpers', __FILE__)
 
-class TestHashes < Test::Unit::TestCase
+class TestHashes < MiniTest::Unit::TestCase
 
   def setup
     # Note that single or double quotes, makes no difference

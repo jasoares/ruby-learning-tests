@@ -1,6 +1,6 @@
-require 'test/unit'
+require File.expand_path('../test_helpers', __FILE__)
 
-class TestFlipFlops < Test::Unit::TestCase
+class TestFlipFlops < MiniTest::Unit::TestCase
 
   def test_flip_flop_operator1
     count = 0

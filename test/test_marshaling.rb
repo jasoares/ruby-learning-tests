@@ -1,8 +1,7 @@
-# *-* encoding: utf-8 *-*
-require 'test/unit'
+require File.expand_path('../test_helpers', __FILE__)
 require './lib/person.rb'
 
-class TestMarshaling < Test::Unit::TestCase
+class TestMarshaling < MiniTest::Unit::TestCase
 
   FILE_NAME = "./tmp/objects.log"
 
@@ -10,7 +9,7 @@ class TestMarshaling < Test::Unit::TestCase
     @str = "object"
     @fixnum = 1
     @float = 1.0
-    @p = Person.new("João", "Soares")
+    @p = Person.new
     @f = File.new(FILE_NAME, "w")
     Marshal.dump @str, @f
     Marshal.dump @fixnum, @f

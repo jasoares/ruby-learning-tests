@@ -1,7 +1,7 @@
-require 'test/unit'
-require './lib/person.rb'
+require File.expand_path('../test_helpers', __FILE__)
+require 'person'
 
-class TestAssignment < Test::Unit::TestCase
+class TestAssignment < MiniTest::Unit::TestCase
 
   def test_chained_assignment
     a = b = 2 + 3

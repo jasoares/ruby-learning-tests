@@ -1,9 +1,8 @@
-# *-* encoding: utf-8 *-*
-require 'test/unit'
-require './lib/person.rb'
-require './lib/customer.rb'
+require File.expand_path('../test_helpers', __FILE__)
+require 'person'
+require 'customer'
 
-class TestObjects < Test::Unit::TestCase
+class TestObjects < MiniTest::Unit::TestCase
 
 	def setup
 		@str1 = "object"
@@ -12,8 +11,6 @@ class TestObjects < Test::Unit::TestCase
 		@tstr = "object".taint
 		@dobj = @str1.dup
 		@fixnum1 = 1
-		@fixnum2 = 1
-		@float1 = 1.0
 		@p = Person.new
 		@cp = @p.clone
 		@fp = @p.clone.freeze
@@ -31,19 +28,6 @@ class TestObjects < Test::Unit::TestCase
 		assert_same @str2, @str3, "Should be equal as both variables point to the same object"
 	end
 
-	def test_string_objects_equality
-		assert_equal @str1, @str2, "Should be equal as both have the same content"
-		assert @str1.eql?(@str2), "Should be as both have the same content and are of the same type"
-		assert !(@str1.equal?(@str2)), "Should be different objects"
-		assert @str2.equal?(@str3), "Should be the same object"
-	end
-
-	def test_numeric_objects_equality
-		assert_equal @fixnum1, @float1, "Should be equal as both have the same content and type is not checked"
-		assert !(@fixnum1.eql? @float1), "Should not be eql? since they have different types"
-		assert @fixnum1.eql?(@fixnum2), "Should be equal in content and type"
-	end
-
 	def test_custom_objects_equality
 		assert_equal @p, @cp, "Should be equal in content as defined in Person#=="
 		assert @p.eql?(@cp), "Should be equal in content and type as defined in Person#eql?"
@@ -52,13 +36,13 @@ class TestObjects < Test::Unit::TestCase
 	def test_tainted_objects_equality
 		assert_equal @str1, @tstr, "Should be equal in content"
 		assert @str1.eql?(@tstr), "Should be equal in content and type"
-		assert_not_same @str1, @tstr, "Should be different objects"
+		refute_same @str1, @tstr, "Should be different objects"
 	end
 
 	def test_custom_tainted_objects_equality
 		assert_equal @p, @tp, "Should be equal in content"
 		assert @p.eql?(@tp), "Should be equal in content and type"
-		assert_not_same @p, @tp, "Should be different objects"
+		refute_same @p, @tp, "Should be different objects"
 	end
 
 	def test_implicit_conversion
@@ -82,10 +66,10 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_object_boolean_comparation
-		assert_not_nil @fixnum1, "Should be different"
-		assert_not_equal @fixnum1, false, "Should be different"
-		assert_not_nil @p, "Should be different"
-		assert_not_equal @p, false, "Should be different"
+		refute_nil @fixnum1, "Should be different"
+		refute_equal @fixnum1, false, "Should be different"
+		refute_nil @p, "Should be different"
+		refute_equal @p, false, "Should be different"
 	end
 
 	def test_object_implicit_boolean_conversion
@@ -112,10 +96,10 @@ class TestObjects < Test::Unit::TestCase
 	end
 
 	def test_frozen_objects
-		assert_nothing_raised(RuntimeError) { @str1.upcase! }
-		assert_raise(RuntimeError) { @fstr.upcase! }
-		assert_nothing_raised(RuntimeError) { @p.fname = "Jane" }
-		assert_raise(RuntimeError) { @fp.fname = "Jane" }
+		assert_equal @str1.upcase, @str1.upcase!, "Should alter the string in place since it is not frozen"
+		assert_raises(RuntimeError) { @fstr.upcase! }
+		assert_equal @p.fname = "Jane", @p.fname, 'Should assign @p.fname with "Jane" since it is not frozen'
+		assert_raises(RuntimeError) { @fp.fname = "Jane" }
 	end
 
 	def test_string_tainted_object

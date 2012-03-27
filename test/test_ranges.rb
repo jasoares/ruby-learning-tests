@@ -1,6 +1,6 @@
-require 'test/unit'
+require File.expand_path('../test_helpers', __FILE__)
 
-class TestRanges < Test::Unit::TestCase
+class TestRanges < MiniTest::Unit::TestCase
 
   def setup
     @r = 1..5
@@ -76,6 +76,14 @@ class TestRanges < Test::Unit::TestCase
     assert @fr === 2.5, "Expected to return true as the range is continuous and 2.5 > 1.0 and 2.5 < 5.0"
     assert @sr === 'c', "Expected to return true as the range includes 'c'"
     assert @msr === 'ABC', "Expected to return true as the range includes the value 'ABC'"
+  end
+
+  # range iterators
+
+  def test_range_each_iterator
+    str = ""
+    @r.each { |i| str << i.to_s + ", " }
+    assert_equal "1, 2, 3, 4, 5, ", str, "should be equal to \"1, 2, 3, 4, 5, \""
   end
 
 end
