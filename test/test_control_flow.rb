@@ -47,4 +47,24 @@ class TestControlFlow < MiniTest::Unit::TestCase
     end
   end
 
+  def test_throw_catch
+    i = 0; a = []
+    catch :k_equal_3 do
+      while(i < 5)
+        j = 1
+        while(j < 5)
+          k = 2
+          while(k < 10)
+            throw :k_equal_3 if k == 3
+            a << k; k += 1
+          end
+          a << j; j += 1
+        end
+        a << i; i += 1
+      end
+    end
+    a << 0
+    assert_equal [2, 0], a
+  end
+
 end
