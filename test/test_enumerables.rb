@@ -40,7 +40,7 @@ class TestEnumerables < MiniTest::Unit::TestCase
   end
 
   def test_collect_or_map_method
-    assert_equal @ary2, @ary1.collect { |e| e + 1 }, "should be return an array with each element incremented by 1"
+    assert_equal @ary2, @ary1.collect { |e| e + 1 }, "should return an array with each element incremented by 1"
   end
 
   def test_collect_concat_or_flat_map_method

@@ -1,6 +1,6 @@
-= Ruby Learning Tests (v0.4.6-dev)
+= Ruby Learning Tests (v0.5.0-dev)
 
-Ruby Unit tests written to learn ruby and their most specific details, 
+Ruby MiniTests written to learn ruby and their most specific details, 
 differences between versions and other curiosities
 
 Includes version conditional code currently between version 1.8.x and 1.9.x
@@ -19,7 +19,9 @@ To run all tests separately use:
 
 To run individual tests use:
   rake test:<name>
-replacing <name> by the name of the test
+replacing <name> by the name of the test file without the "test_" part and without the ".rb" extension
+Example:
+  rake test:arrays
 
 To see which tests you can run use:
 
@@ -45,12 +47,12 @@ repository and grow your own...
 
 == Development
 
-Active development happens in the trunk branch, master branch is used to merge stable versions of the trunk branch.
+Active development happens in the minitest branch, master branch is used to merge stable versions of the minitest branch. The unit-test is the old branch where all the original code was written previously to the change to to minitest.
 
 == Shifting to MiniTest
 
-The development branch minitest has shifted to use minitest instead of unit test.
-If you are using ruby 1.9.x there's nothing you need to do about it but if you are
+The development branch minitest has shifted to use minitest instead of unit test, the old unit tests will not be further developed.
+If you are using ruby 1.9.x there's nothing you need to do about it but if you are running
 ruby 1.8.x or a prior version you need to make sure you install the minitest gem.
 
 The Gemfile included in the repo asks for version 2.11.3. It's easy to install, just run:
@@ -71,5 +73,4 @@ or
 
   bundle install
 
-and your equally ready to go.
-
+and you're equally ready to go.
