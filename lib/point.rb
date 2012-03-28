@@ -1,11 +1,50 @@
 class Point
 
-  #attr_accessor :x, :y   # Needed when not explicitly defined
-  #attr_reader :x, :y     # Needed when not explicitly defined
+  include Enumerable
+  include Comparable
+
+  # number of points created, class variable
+  @@n = 0
+
+  # class instance variables
+  class << self
+    attr_accessor :totalX, :totalY
+  end
+
+  def self.sum(*points)
+    x = y = 0
+    points.each { |p| x += p.x; y += p.y }
+    Point.new(x, y)
+  end
+
+  # class method mixing class variables and class instance variables
+  def self.report
+    puts "Number of points created: #@@n"
+    puts "Average X coordinate: #{@totalX.to_f/@@n}"
+    puts "Average Y coordinate: #{@totalY.to_f/@@n}"
+  end
+
+  # class method to reset class variables
+  def self.reset
+    @@n = 0   # class variable
+  end
 
   def initialize x, y
     @x, @y = x, y
+    @@n += 1  # class variable
   end
+
+  ORIGIN = Point.new(0, 0)
+  UNIT_X = Point.new(1, 0)
+  UNIT_Y = Point.new(0, 1)
+
+  def self.new(x, y)
+    @totalX += x  # class instance variable
+    @totalY += y  # class instance variable
+    super
+  end
+
+  #attr_accessor :x, :y   # Needed when not explicitly defined like below
 
   def x
     @x
@@ -51,6 +90,17 @@ class Point
     [self, other]
   end
 
+  def add!(p)
+    @x += p.x
+    @y += p.y
+    self
+  end
+
+  def add(p)
+    q = self.dup
+    q.add!(p)
+  end
+
   def [](index)
     case index
     when 0, -2 then @x
@@ -66,8 +116,6 @@ class Point
     yield @y
   end
 
-  include Enumerable
-
   def ==(o)
     if o.is_a? Point
       @x == o.x && @y == o.y
@@ -82,13 +130,18 @@ class Point
 
   def hash
     code = 17
-    code = 37 * code + @x.hash
-    code = 37 * code + @y.hash
+    code = 31 * code + @x.hash
+    code = 31 * code + @y.hash
     code
   end
 
+  def <=>(other)
+    return nil unless other.instance_of? Point
+    @x**2 + @y**2 <=> other.x**2 + other.y**2
+  end
+
   def to_s
-    "#{@x}, #{@y}"
+    "(#{@x}, #{@y})"
   end
 
 end
