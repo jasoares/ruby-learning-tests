@@ -5,6 +5,8 @@ class Point
 
   # number of points created, class variable
   @@n = 0
+  @totalX = 0
+  @totalY = 0
 
   # class instance variables
   class << self
@@ -29,7 +31,7 @@ class Point
     @@n = 0   # class variable
   end
 
-  def initialize x, y
+  def initialize(x, y)
     @x, @y = x, y
     @@n += 1  # class variable
   end
@@ -39,9 +41,9 @@ class Point
   UNIT_Y = Point.new(0, 1)
 
   def self.new(x, y)
-    @totalX += x  # class instance variable
-    @totalY += y  # class instance variable
-    super
+    @totalX = x # class instance variable
+    @totalY = y # class instance variable
+    super x, y
   end
 
   #attr_accessor :x, :y   # Needed when not explicitly defined like below
@@ -103,10 +105,8 @@ class Point
 
   def [](index)
     case index
-    when 0, -2 then @x
-    when 1, -1 then @y
-    when :x, "x" then @x
-    when :y, "y" then @y
+    when 0, -2, :x, "x" then @x
+    when 1, -1, :y, "y" then @y
     else nil
     end
   end
