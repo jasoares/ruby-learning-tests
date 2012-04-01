@@ -41,8 +41,8 @@ class Point
   UNIT_Y = Point.new(0, 1)
 
   def self.new(x, y)
-    @totalX = x # class instance variable
-    @totalY = y # class instance variable
+    @totalX += x # class instance variable
+    @totalY += y # class instance variable
     super x, y
   end
 
