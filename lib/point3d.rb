@@ -6,7 +6,7 @@ class Point3D < Point
 
   def self.sum(*points)
     z = 0
-    p2d = super points
+    p2d = super
     points.each { |p| z += p.z }
     Point3D.new(p2d.x, p2d.y, z)
   end
@@ -14,6 +14,11 @@ class Point3D < Point
   def self.report
     super
     puts "Average Z coordinate: #{@@totalZ.to_f/@@n}"
+  end
+
+  def self.reset
+    super
+    @@totalZ = 0
   end
 
   def initialize(x, y, z)
@@ -54,14 +59,16 @@ class Point3D < Point
 
   def [](index)
     case index
-    when 2, -3, :z, "z" then @z
+    when 0, -3, :x, "x" then @x
+    when 1, -2, :y, "y" then @y
+    when 2, -1, :z, "z" then @z
     else super index
     end
   end
 
   def each
-    yield @z
     super
+    yield @z
   end
 
   def ==(o)
