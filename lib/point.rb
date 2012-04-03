@@ -5,8 +5,8 @@ class Point
 
   # number of points created, class variable
   @@n = 0
-  @totalX = 0
-  @totalY = 0
+  @@totalX = 0
+  @@totalY = 0
 
   # class instance variables
   class << self
@@ -22,29 +22,25 @@ class Point
   # class method mixing class variables and class instance variables
   def self.report
     puts "Number of points created: #@@n"
-    puts "Average X coordinate: #{@totalX.to_f/@@n}"
-    puts "Average Y coordinate: #{@totalY.to_f/@@n}"
+    puts "Average X coordinate: #{@@totalX.to_f/@@n}"
+    puts "Average Y coordinate: #{@@totalY.to_f/@@n}"
   end
 
   # class method to reset class variables
   def self.reset
-    @@n = 0   # class variable
+    @@n = @@totalX = @@totalY = 0
   end
 
   def initialize(x, y)
     @x, @y = x, y
     @@n += 1  # class variable
+    @@totalX += x # class instance variable
+    @@totalY += y # class instance variable
   end
 
   ORIGIN = Point.new(0, 0)
   UNIT_X = Point.new(1, 0)
   UNIT_Y = Point.new(0, 1)
-
-  def self.new(x, y)
-    @totalX += x # class instance variable
-    @totalY += y # class instance variable
-    super x, y
-  end
 
   #attr_accessor :x, :y   # Needed when not explicitly defined like below
 

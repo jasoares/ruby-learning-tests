@@ -4,7 +4,7 @@ require 'point'
 class TestSampleClass < MiniTest::Unit::TestCase
 
   def setup
-    Point.reset; Point.totalX = 0; Point.totalY = 0
+    Point.reset;
     @p = Point.new(2, 1)
     @q = Point.new(1, 2)
     @r = Point.new(2, 1)
